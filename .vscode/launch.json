@@ -4,6 +4,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Solution0002",
+            "request": "launch",
+            "mainClass": "Solution0002",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Solution",
+            "request": "launch",
+            "mainClass": "Solution",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
             "name": "Launch Solution",
             "request": "launch",
             "mainClass": "Array.Solution",
