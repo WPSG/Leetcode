@@ -49,4 +49,8 @@ class Solution0003 {
         }
         return subStringLength;
     }
+    public static void  main(String Args[]){
+        String s = "fhafhuahsdfcvasfvchsudfv";
+        System.out.println(s + '\n' + new Solution0003().lengthOfLongestSubstring(s));
+    }
 }
