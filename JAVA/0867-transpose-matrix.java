@@ -1,4 +1,6 @@
-class Solution0867{
+package JAVA;
+
+class Solution0867 {
     public int[][] tranpose(int [][] A){
         int width = A.length, height = A[0].length;
         int [][]B = new int[height][width];

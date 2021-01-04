@@ -34,6 +34,7 @@ nums2.length == n
 
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/median-of-two-sorted-arrays */
+package JAVA;
 class Solution0004{
     public double findMedianSortedArrays(int []nums1, int []nums2){
         int m = nums1.length, n = nums2.length;
