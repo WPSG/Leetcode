@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,6 +9,8 @@ class Solution {
 public:
   vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
     vector<vector<int>> res;
+    // 排序是剪枝的前提
+    sort(candidates.begin(), candidates.end());
     int length = candidates.size();
     if(length == 0) return res;
     vector<int> path;
@@ -25,12 +28,16 @@ public:
    * @return {*}
    */  
   void dfs(vector<int> &candidates, vector<int> path, vector<vector<int>> &res, int target, int startPos, int length){
-    if(target < 0) return ;
+    // 由于进入更深层的时候，小于 0 的部分被剪枝，因此递归终止条件值只判断等于 0 的情况
     if(target == 0) {
       res.push_back(path);
       return ;
     }
     for(int i = startPos; i < length; i++){
+      // 重点理解这里剪枝，前提是候选数组已经有序，
+      if (target - candidates[i] < 0) {
+          break;
+      }
       path.push_back(candidates[i]);
       dfs(candidates, path, res, target - candidates[i], i, length);
       path.pop_back();
