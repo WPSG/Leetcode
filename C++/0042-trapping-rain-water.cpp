@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-07 15:02:34
  * @LastEditors: ROC
- * @LastEditTime: 2021-01-07 18:48:53
+ * @LastEditTime: 2021-01-07 19:03:26
  * @FilePath: \Leetcode\C++\0042-trapping-rain-water.cpp
  */
 #include <cstdio>
@@ -14,19 +14,10 @@ class Solution{
 public:
   int trap(vector<int> &height){
     int n = height.size(), sum = 0;
-    int leftMax[n]; // 存放当前列左边的最高列的坐标
-    int rightMax[n]; // 存放当前列右边的最高列的坐标
+    int leftMax = 0; // 存放当前列左边的最高列的坐标
+    int *rightMax = new int[n]; // 存放当前列右边的最高列的坐标
     // 初始化成0
-    fill(leftMax, leftMax + n, 0);
     fill(rightMax, rightMax + n, 0);
-    // 获得leftMax的值
-    for(int i = 1; i < n - 1; i++){
-      int max = (height[i - 1] - leftMax[i - 1] > 0) ? height[i - 1] : leftMax[i - 1];
-      printf("%d ", max);
-      leftMax[i] = max;
-    }
-    printf("\n");
-    // 获得rightMax的值
     for(int i = n - 2; i >= 0; i--){
       int max = (height[i + 1] - rightMax[i + 1] > 0) ? height[i + 1] : rightMax[i + 1];
       printf("%d ", max);
@@ -35,7 +26,10 @@ public:
     printf("\n");
     // 计算每一列的水量。通过比较列值和左右两个最高列的关系计算每一列的水量
     for(int i = 1; i < n - 1; i++){
-      int min = leftMax[i] - rightMax[i] > 0 ? rightMax[i] : leftMax[i];
+      // 获得当前列的左边最高列坐标
+      int max = (height[i - 1] - leftMax > 0) ? height[i - 1] : leftMax;
+      leftMax = max;
+      int min = leftMax - rightMax[i] > 0 ? rightMax[i] : leftMax;
       if(min > height[i])
         sum += (min - height[i]);
     }
