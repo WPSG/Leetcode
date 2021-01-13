@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-13 14:13:01
  * @LastEditors: ROC
- * @LastEditTime: 2021-01-13 14:36:29
+ * @LastEditTime: 2021-01-13 14:53:48
  * @FilePath: \Leetcode\C++\0062-unique-paths.cpp
  */
 #include <cstdio>
@@ -11,20 +11,26 @@ using namespace std;
 
 class Solution{
 public:
+  /**
+   * @Description: ——DP
+   *  用dp[i][j]表示从左上角走到（i,j）的路径数量。由于我们每一步只能从向下或者向右移动一步，因此要想走到（i,j）
+   *  如果向下走一步，那么会从 (i−1,j)(i-1, j)(i−1,j) 走过来；如果向右走一步，那么会从 (i,j−1)(i, j-1)(i,j−1) 走过来。
+   *  所以地图中任意一点的走法数是 dp[i][j] = dp[i-1][j] + dp[i][j-1]
+   * @Author: ROC
+   * @param {int} m
+   * @param {int} n
+   * @return {*}
+   */
   int uniquePaths(int m, int n){
-    unsigned long long int temp = 1;
-    unsigned long long int result = 1;
-    if (m == 1 || n == 1) return 1;
-    if (m > n) swap(m, n); //保证m<=n
-    //计算阶乘
-    for (int i = 1; i <= m-1 ; i++){
-      temp *= i;
+    vector<vector<int>> dp(m, vector<int>(n));
+    for(int i = 0; i < m; i++) dp[i][0] = 1;
+    for(int i = 0; i < n; i++) dp[0][i] = 1;
+    for(int i = 1; i < m; i++){
+      for(int j = 1; j < n; j++){
+        dp[i][j] = dp[i-1][j] + dp[i][j-1];
+      }
     }
-    for (int i = n; i <= m + n - 2; i++){
-      result *= i;
-    }
-    result = result / temp;
-    return result;
+    return dp[m - 1][n - 1];
   }
 };
 
