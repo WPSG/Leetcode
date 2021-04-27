@@ -4,6 +4,62 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Job51",
+            "request": "launch",
+            "mainClass": "Job51",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
+            "name": "Launch ListSort",
+            "request": "launch",
+            "mainClass": "ListSort",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Solution002",
+            "request": "launch",
+            "mainClass": "Solution002",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Solution002",
+            "request": "launch",
+            "mainClass": "DEMO.Solution002",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Solution001",
+            "request": "launch",
+            "mainClass": "DEMO.Solution001",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Solution0001",
+            "request": "launch",
+            "mainClass": "JAVA.Solution0001",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Solution",
+            "request": "launch",
+            "mainClass": "JAVA.Solution",
+            "projectName": "Leetcode_6cbac60b"
+        },
+        {
+            "type": "java",
             "name": "Launch Solution0867",
             "request": "launch",
             "mainClass": "Solution0867",
