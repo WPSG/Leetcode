@@ -1,11 +1,12 @@
 /*
  * @Date: 2021-01-19 14:40:48
  * @LastEditors: ROC
- * @LastEditTime: 2021-05-25 20:33:26
+ * @LastEditTime: 2021-05-25 21:01:07
  * @FilePath: \Leetcode\C++\0121-best-time-to-buy-and-sell-stock.cpp
  */
 #include <cstdio>
 #include <vector>
+#include <limits.h>
 
 using namespace std;
 
@@ -35,17 +36,13 @@ public:
       // 可以进行进一步化简去掉所有 k：
       // dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
       // dp[i][1] = max(dp[i-1][1], -prices[i])
-      int (*dp)[2] = new int[n][2];
+      int dp_i_0 = 0, dp_i_1 = INT_MIN;
+      // 新状态只和相邻的一个状态有关，其实不用整个 dp 数组，只需要一个变量储存相邻的那个状态就足够了，这样可以把空间复杂度降到 O(1)
       for(int i = 0; i < n; i++) {
-        if(i == 0) {
-          dp[i][0] = 0;
-          dp[i][1] = -prices[i];
-          continue;
-        }
-        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-        dp[i][1] = max(dp[i - 1][1], -prices[i]);
+        dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
+        dp_i_1 = max(dp_i_1, -prices[i]);
       }
-      return dp[n - 1][0];
+      return dp_i_0;
     }
 };
 
