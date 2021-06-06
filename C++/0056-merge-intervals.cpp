@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-11 15:04:36
  * @LastEditors: ROC
- * @LastEditTime: 2021-01-11 16:22:48
+ * @LastEditTime: 2021-06-06 09:37:47
  * @FilePath: \Leetcode\C++\0056-merge-intervals.cpp
  */
 #include <cstdio>
@@ -20,19 +20,18 @@ public:
    */
   vector<vector<int>> merge(vector<vector<int>> &intervels){
     vector<vector<int>> res;
-    int length = intervels.size();
+    if(intervels.size() == 0) return res;
     sort(intervels.begin(), intervels.end());
-    if(length == 0) return res;
-    vector<int> present = intervels[0];
-    for(int i = 1; i < length; i++){
-      if(present[1] < intervels[i][0]){
-        res.push_back(present);
-        present = intervels[i];
+    vector<int> pre = intervels[0];
+    for(vector<int> curr : intervels) {
+      if(pre[1] < curr[0]) {
+        res.push_back(pre);
+        pre = curr;
       } else {
-        present[1] = present[1] > intervels[i][1] ? present[1] : intervels[i][1];
+        pre[1] = max(pre[1], curr[1]);
       }
     }
-    res.push_back(present);
+    res.push_back(pre);
     return res;
   }
 };
