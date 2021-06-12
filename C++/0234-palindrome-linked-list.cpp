@@ -3,7 +3,7 @@
  * @Author: ROC
  * @Date: 2021-06-12 13:40:02
  * @LastEditors: ROC
- * @LastEditTime: 2021-06-12 14:19:00
+ * @LastEditTime: 2021-06-12 15:04:13
  * @FilePath: \Leetcode\C++\0234-palindrome-linked-list.cpp
  */
 struct ListNode {
@@ -20,20 +20,34 @@ using namespace std;
 
 class Solution {
   public:
-
-  ListNode* left = nullptr;
-
   bool isPalindrome(ListNode* head) {
-    left = head;
-    return traverse(head);
+    // 通过「双指针技巧」中的快慢指针来找到链表的中点
+    ListNode *slow = head, *fast = head;
+    while(fast != NULL && fast->next != NULL) {
+      slow = slow->next;
+      fast = fast->next->next;
+    }
+    // 如果fast指针没有指向null，说明链表长度为奇数，slow还要再前进一步
+    if(fast != NULL) {
+      slow = slow->next;
+    }
+    // 从slow开始反转后面的链表，开始比较回文串
+    ListNode* left = head;
+    ListNode* right = reverse(slow);
+    while(right != NULL) {
+      if(left->val != right->val) return false;
+      left = left->next;
+      right = right->next;
+    }
+    return true;
   }
 
-  bool traverse(ListNode* right) {
-    if(right == nullptr) return true;
-    bool res = traverse(right->next);
-    // 后序遍历链表
-    res = res && (right->val == left->val);
-    left = left->next;
-    return res;
+  // 翻转以head开头的链表，返回新链表的起始节点
+  ListNode* reverse(ListNode* head) {
+    if(head == NULL || head->next == NULL) return head;
+    ListNode* last = reverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return last;
   }
 };
